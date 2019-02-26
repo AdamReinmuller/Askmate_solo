@@ -14,7 +14,7 @@ def index():
 @app.route('/post-question', methods=['GET', 'POST'])
 def post_question():
     if request.method == 'GET':
-        return render_template('post-question.html')
+        return render_template('add-question.html')
     elif request.method == 'POST':
         title = request.form['title']
         message = request.form['message']
