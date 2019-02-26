@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Question</title>
+</head>
+<body>
+    <h1> Question </h1>
+    <h4><a href="/">Back</a></h4>
+    <p><strong> {{ question['title'] }}</strong> </p>
+    <p> {{ question['message'] }} </p>
+    <h4><a href="/question/{{question['id']}}/add-answer">Add answer</a></h4>
+    {% if answers %}
+    <table border="1" width="95%">
+        <thead>
+            <tr>
+                {% for key in answers[0].keys() %}
+                <th> {{key}} </th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for row in answers %}
+            <tr>
+
+                {% for value in row.values() %}
+                    <td> {{value}} </td>
+                {% endfor %}
+                <td><a href="/answer/{{ row['id'] }}/delete">delete</a></td>
+                <td><a href="/edit-answer/{{ row['id'] }}">edit</a></td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

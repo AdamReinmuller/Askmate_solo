@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homepage</title>
+</head>
+<body>
+    <h1>List of questions</h1>
+    <h4><a href="/post-question">Add new question</a></h4>
+    <table border="1" width="95%">
+        <thead>
+            <tr>
+                {% for key in questions[0].keys() %}
+                <th> {{key}} </th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for row in questions %}
+            <tr>
+                {% for key, value in row.items() %}
+                    {% if key != 'title' %}
+                        <td> {{value}} </td>
+                    {% else %}
+                        <td><a href="/question/{{ row['id'] }}">{{ value }}</a></td>
+                {% endif %}
+                {% endfor %}
+                <td><a href="/question/{{ row['id'] }}/delete">delete</a></td>
+                <td><a href="/edit-question/{{ row['id'] }}">edit</a></td>
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
