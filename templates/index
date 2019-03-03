@@ -11,7 +11,10 @@
         <thead>
             <tr>
                 {% for key in questions[0].keys() %}
-                <th> {{key}} </th>
+                <th> {{key}} <br>
+                     <a href="/?order_by={{ key }}&order_direction=asc">↑</a>
+                     <a href="/?order_by={{ key }}&order_direction=desc">↓</a>
+                </th>
                 {% endfor %}
             </tr>
         </thead>
@@ -28,6 +31,7 @@
                 {% endfor %}
                 <td><a href="/question/{{ row['id'] }}/delete">delete</a></td>
                 <td><a href="/edit-question/{{ row['id'] }}">edit</a></td>
+                <td><a href="/question/{{row['id']}}/add-answer">Add answer</a></td>
 
 
             </tr>

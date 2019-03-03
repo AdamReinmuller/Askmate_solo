@@ -1,14 +1,25 @@
 import connection
 import util
-import csv
 import time
 
 
-def get_questions():
+def get_questions(key="", sort=""):
     """
+    :key: by what fieldname you sort it
+    :sort: asc or desc
     :return: questions in a list of ordered dictionaries
     """
     questions = connection.import_from_csv(connection.question_file)
+    if sort == 'desc':
+        try:
+            questions = sorted(questions, key=lambda x: int(x[key]), reverse=True)
+        except:
+            questions = sorted(questions, key=lambda x: x[key], reverse=True)
+    elif sort == 'asc':
+        try:
+            questions = sorted(questions, key=lambda x: int(x[key]), reverse=False)
+        except:
+            questions = sorted(questions, key=lambda x: x[key], reverse=False)
     return questions
 
 
@@ -89,9 +100,10 @@ def delete_question_by_id(question_id):
         if row['id'] == question_id:
             questions.remove(row)
     connection.export_to_csv(connection.question_file, questions)
-    for row in answers:
+    for row in answers[:]:
         if row['question_id'] == question_id:
             answers.remove(row)
+            continue
     connection.export_to_csv(connection.answer_file, answers)
 
 

@@ -8,6 +8,8 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     questions = data_manager.get_questions()
+    if request.args:
+        questions = data_manager.get_questions(request.args['order_by'], request.args['order_direction'])
     return render_template('index', questions=questions)
 
 
